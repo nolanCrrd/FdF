@@ -6,38 +6,54 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:33:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/14 16:13:59 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/16 14:05:02 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 #include "../../includes/libft.h"
+#include "../../includes/ft_printf.h"
 #include "../../includes/get_next_line_bonus.h"
+#include <stdlib.h>
+
+void	clean_exit(int fd, t_point **lst, char *msg)
+{
+	ft_dprintf(2, "%s\n", msg);
+	clear_point_lst(lst);
+	while (get_next_line(fd) != NULL)
+		;
+	exit(1);
+}
+
+void	split_clear(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+		free(strs[i++]);
+	free(strs);
+}
+
+// TODO: norm it with a struct
+// TODO: redo the doc
 
 /**
- * @brief create a list of point to render in the window,
- * the list is NULL terminated
- * 
- * @param file_path path to the file that contain the map
- * @return t_point* list of point / NULL for errors
+ * @brief Setup the map structure with all the data in fd
+ *
+ * @param map Strcture of the map
+ * @param fd File descriptor of the map file
+ * @return 
  */
-t_point	**generate_point_list(char *file_path)
+int	generate_point_list(t_map *map, int fd)
 {
-	t_point	**list;
-	int		map_width;
-	int		map_height;
 	char	**current_line;
 	char	**current_point;
 	char	*gnl_res;
-	int		fd;
 	int		current_x;
 	int		y;
 
-	fd = open_file(file_path);
-	if (fd < 0)
-		return (NULL);
 	gnl_res = get_next_line(fd);
-	map_width = -1;
 	y = 0;
 	while (gnl_res != NULL)
 	{
@@ -49,26 +65,21 @@ t_point	**generate_point_list(char *file_path)
 			{
 				current_point = ft_split(current_line[current_x], ',');
 				if (current_point == NULL)
-				{
-					// TODO: handle malloc error
-					return (NULL);
-				}
-				if (add_point_list(&list, current_point, current_x, y))
-				{
-					// TODO: Handle Error
-				}
+					clean_exit(fd, map->lst, "Malloc failed");
+				if (add_point_list(&(map->lst), current_point, current_x, y))
+					clean_exit(fd, map->lst, "Malloc failed");
 				current_x++;
+				split_clear(current_point);
 			}
 		}
-		if (map_width == -1)
-			map_width = current_x;
-		else if (map_width != current_x)
-		{
-			// TODO: Error
-			return (NULL);
-		}
+		if (map->map_width < current_x)
+			map->map_width = current_x;
+		free(gnl_res);
 		gnl_res = get_next_line(fd);
 		y++;
+		// TODO: clear splits
+		split_clear(current_line);
 	}
-	return (list);
+	map->map_height = y;
+	return (0);
 }
