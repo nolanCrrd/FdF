@@ -6,10 +6,11 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:15:41 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/16 12:33:16 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:26:59 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/get_next_line_bonus.h"
 #include "../../includes/fdf.h"
 #include "../../includes/libft.h"
 #include "../../includes/ft_printf.h"
@@ -61,37 +62,53 @@ unsigned long	get_color_from_string(char *color)
 	converted = 0;
 	while (color[i] && ft_strchr(base, color[i]) != NULL)
 	{
-		converted = converted * 16 + (ft_strchr(base, color[i]) - base);
+		converted = converted * 16 + (ft_strchr(base,
+										  ft_toupper(color[i])) - base);
 		i++;
 	}
+	converted = converted * 16 + (ft_strchr(base, 'F') - base);
+	converted = converted * 16 + (ft_strchr(base, 'F') - base);
 	return (converted);
 }
 
-int	add_point_list(t_point ***list, char **point_info, int x, int y)
+int	get_number_point(int fd)
+{
+	int		nb_tot;
+	char	*res;
+	int		i;
+
+	res = get_next_line(fd);
+	nb_tot = 0;
+	while (res != NULL)
+	{
+		i = 0;
+		while (res[i])
+		{
+			if (res[i] != ' ' && (res[i + 1] == ' ' || res[i + 1] == 0))
+				nb_tot++;
+			i++;
+		}
+		free(res);
+		res = get_next_line(fd);
+	}
+	return (nb_tot);
+}
+
+int	add_point_list(t_point **list, char **point_info, int x, int y)
 {
 	int		i;
-	t_point	**new_lst;
 	t_point	*new_point;
 
 	i = 0;
-	while (list && *list && (*list)[i])
+	while (list && list[i])
 		i++;
 	new_point = malloc(sizeof(t_point));
-	new_lst = malloc(sizeof(t_point *) * (i + 2));
-	if (new_lst == NULL || new_point == NULL)
+	if (new_point == NULL)
 		return (1);
-	i = -1;
-	while (list && *list && (*list)[++i])
-		new_lst[i] = (*list)[i];
 	new_point->x = x;
 	new_point->y = y;
 	new_point->altitude = get_altitude_from_string(point_info[0]);
 	new_point->color = get_color_from_string(point_info[1]);
-	if (i == -1)
-		i = 0;
-	new_lst[i++] = new_point;
-	new_lst[i] = NULL;
-	free(*list);
-	*list = new_lst;
+	list[i] = new_point;
 	return (0);
 }

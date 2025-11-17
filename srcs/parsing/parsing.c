@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:33:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/16 14:05:02 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:22:18 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	split_clear(char **strs)
 		free(strs[i++]);
 	free(strs);
 }
-
-// TODO: norm it with a struct
-// TODO: redo the doc
 
 /**
  * @brief Setup the map structure with all the data in fd
@@ -66,7 +63,7 @@ int	generate_point_list(t_map *map, int fd)
 				current_point = ft_split(current_line[current_x], ',');
 				if (current_point == NULL)
 					clean_exit(fd, map->lst, "Malloc failed");
-				if (add_point_list(&(map->lst), current_point, current_x, y))
+				if (add_point_list(map->lst, current_point, current_x, y))
 					clean_exit(fd, map->lst, "Malloc failed");
 				current_x++;
 				split_clear(current_point);
@@ -77,7 +74,6 @@ int	generate_point_list(t_map *map, int fd)
 		free(gnl_res);
 		gnl_res = get_next_line(fd);
 		y++;
-		// TODO: clear splits
 		split_clear(current_line);
 	}
 	map->map_height = y;
