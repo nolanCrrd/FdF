@@ -58,6 +58,8 @@ unsigned long	get_color_from_string(char *color)
 	if (color == NULL)
 		return (0);
 	base = "0123456789ABCDEF";
+	if (color[0] != '0')
+		return (DEFAULT_COLOR);
 	i = 2;
 	converted = 0;
 	while (color[i] && ft_strchr(base, color[i]) != NULL)
@@ -66,8 +68,11 @@ unsigned long	get_color_from_string(char *color)
 										  ft_toupper(color[i])) - base);
 		i++;
 	}
-	converted = converted * 16 + (ft_strchr(base, 'F') - base);
-	converted = converted * 16 + (ft_strchr(base, 'F') - base);
+	if (i != 2)
+	{
+		converted = converted * 16 + (ft_strchr(base, 'F') - base);
+		converted = converted * 16 + (ft_strchr(base, 'F') - base);
+	}
 	return (converted);
 }
 
@@ -75,40 +80,57 @@ int	get_number_point(int fd)
 {
 	int		nb_tot;
 	char	*res;
-	int		i;
+	int		nb_line;
 
 	res = get_next_line(fd);
 	nb_tot = 0;
+	nb_line = 0;
 	while (res != NULL)
 	{
-		i = 0;
-		while (res[i])
+		if (nb_tot == 0)
 		{
-			if (res[i] != ' ' && (res[i + 1] == ' ' || res[i + 1] == 0))
-				nb_tot++;
-			i++;
+			while (res[nb_line])
+			{
+				if (res[nb_line] != ' ' && (res[nb_line + 1] == ' ' || res[nb_line + 1] == 0))
+					nb_tot++;
+				nb_line++;
+			}
+			nb_line = 0;
 		}
+		nb_line += 1;
 		free(res);
 		res = get_next_line(fd);
 	}
+	nb_tot = nb_tot * nb_line;
 	return (nb_tot);
 }
 
-int	add_point_list(t_point **list, char **point_info, int x, int y)
+int	add_point_static_lst(t_point **list, t_point *point,int x, int y)
 {
-	int		i;
-	t_point	*new_point;
+	static int	i = 0;
 
-	i = 0;
-	while (list && list[i])
-		i++;
-	new_point = malloc(sizeof(t_point));
-	if (new_point == NULL)
-		return (1);
-	new_point->x = x;
-	new_point->y = y;
-	new_point->altitude = get_altitude_from_string(point_info[0]);
-	new_point->color = get_color_from_string(point_info[1]);
-	list[i] = new_point;
+	point->x = x;
+	point->y = y;
+	list[i++] = point;
 	return (0);
 }
+
+t_point	*get_first_point(char *parsed_line)
+{
+	t_point			*point;
+	int				i;
+
+	point = malloc(sizeof(t_point));
+	if (point == NULL)
+		return (point);
+	point->altitude = ft_atoi(parsed_line);
+	i = 0;
+	while (parsed_line[i] && parsed_line[i] != ' ' && parsed_line[i] != ',')
+		i++;
+	if (parsed_line[i] == ',')
+		point->color = get_color_from_string(&parsed_line[i + 1]);
+	else
+		point->color = get_color_from_string(&parsed_line[i]);
+	return (point);
+}
+

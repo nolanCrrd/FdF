@@ -6,12 +6,11 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:33:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/17 13:22:18 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/18 11:29:34 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
-#include "../../includes/libft.h"
 #include "../../includes/ft_printf.h"
 #include "../../includes/get_next_line_bonus.h"
 #include <stdlib.h>
@@ -25,57 +24,41 @@ void	clean_exit(int fd, t_point **lst, char *msg)
 	exit(1);
 }
 
-void	split_clear(char **strs)
+void	parsing_opti(t_map *map, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (strs[i])
-		free(strs[i++]);
-	free(strs);
-}
-
-/**
- * @brief Setup the map structure with all the data in fd
- *
- * @param map Strcture of the map
- * @param fd File descriptor of the map file
- * @return 
- */
-int	generate_point_list(t_map *map, int fd)
-{
-	char	**current_line;
-	char	**current_point;
 	char	*gnl_res;
+	int		i;
 	int		current_x;
 	int		y;
+	t_point	*current_point;
 
 	gnl_res = get_next_line(fd);
 	y = 0;
 	while (gnl_res != NULL)
 	{
+		i = 0;
 		current_x = 0;
-		current_line = ft_split(gnl_res, ' ');
-		if (current_line != NULL)
+		while (gnl_res[i])
 		{
-			while (current_line[current_x] != NULL)
+			if (gnl_res[i] != ' ')
 			{
-				current_point = ft_split(current_line[current_x], ',');
+				current_point = get_first_point(&gnl_res[i]);
 				if (current_point == NULL)
-					clean_exit(fd, map->lst, "Malloc failed");
-				if (add_point_list(map->lst, current_point, current_x, y))
-					clean_exit(fd, map->lst, "Malloc failed");
+					clean_exit(fd, map->lst, "Malloc error");
+				add_point_static_lst(map->lst, current_point, current_x, y);
 				current_x++;
-				split_clear(current_point);
 			}
+			if (current_point && ABS(current_point->altitude) > ABS(map->map_altitude))
+				map->map_altitude = current_point->altitude;
+			while (gnl_res[i] && gnl_res[i] != ' ')
+				i++;
+			while (gnl_res[i] && gnl_res[i] == ' ')
+				i++;
 		}
-		if (map->map_width < current_x)
-			map->map_width = current_x;
 		free(gnl_res);
 		gnl_res = get_next_line(fd);
 		y++;
-		split_clear(current_line);
 	}
+	map->map_width = current_x;
 	map->map_height = y;
-	return (0);
 }
