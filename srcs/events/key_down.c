@@ -22,25 +22,25 @@ static void	rotate_keys(int key, t_update_info *mlx)
 		mlx->angle_y_move = -0.5;
 	if (key == KEY_RIGHT)
 		mlx->angle_y_move = 0.5;
-	if (key == KEY_w)
+	if (key == KEY_W)
 		mlx->angle_z_move = 0.5;
-	if (key == KEY_s)
+	if (key == KEY_S)
 		mlx->angle_z_move = -0.5;
 }
 
 static void	translate_key(int key, t_update_info *mlx)
 {
-	if (key == KEY_h)
+	if (key == KEY_H)
 		mlx->x_move = MOVE_SPEED;
-	if (key == KEY_l)
+	if (key == KEY_L)
 		mlx->x_move = -MOVE_SPEED;
-	if (key == KEY_k)
+	if (key == KEY_K)
 		mlx->y_move = MOVE_SPEED;
-	if (key == KEY_j)
+	if (key == KEY_J)
 		mlx->y_move = -MOVE_SPEED;
-	if (key == KEY_plus)
+	if (key == KEY_PLUS)
 		mlx->scale_move = 0.005;
-	if (key == KEY_minus)
+	if (key == KEY_PLUS)
 		mlx->scale_move = -0.005;
 	if (key == KEY_SHIFT)
 		mlx->move_modifier = 1;
