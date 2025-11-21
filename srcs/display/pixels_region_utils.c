@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:50:21 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 11:51:06 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/21 11:51:04 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ unsigned long	get_color_smooth(unsigned long origin, unsigned long dest,
 	color = (color << 8) | 0xFF;
 	return (color);
 }
-

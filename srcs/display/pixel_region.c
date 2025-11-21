@@ -37,19 +37,18 @@ static int	init_case(t_point *origin, t_point *dest, float *x_inc,
 	return (nb_step);
 }
 
-void	add_line(mlx_color *pixels, t_point *origin, t_point *dest)
+void	add_line(mlx_color *pixels, t_point *origin, t_point *dest, int i)
 {
 	float	current_x;
 	float	current_y;
 	float	x_inc;
 	float	y_inc;
 	int		nb_step;
-	int		nb_step_ori;
 
 	current_x = origin->screen_x;
 	current_y = origin->screen_y;
 	nb_step = init_case(origin, dest, &x_inc, &y_inc);
-	nb_step_ori = nb_step;
+	i = nb_step;
 	while (nb_step > 0)
 	{
 		if (current_y >= 0 && current_x >= 0 && current_x < WIN_W
@@ -58,7 +57,7 @@ void	add_line(mlx_color *pixels, t_point *origin, t_point *dest)
 		{
 			pixels[(int)(round(current_y) * WIN_W + round(current_x))]
 				= (mlx_color){.rgba = get_color_smooth(origin->color,
-					dest->color, nb_step_ori - nb_step, nb_step_ori)
+					dest->color, i - nb_step, i)
 			};
 		}
 		current_x += x_inc;
@@ -77,10 +76,10 @@ void	add_line_pixels(t_map *map, mlx_color *pixels)
 	{
 		cible = get_right_point(map, map->lst[i]);
 		if (cible)
-			add_line(pixels, map->lst[i], cible);
+			add_line(pixels, map->lst[i], cible, 0);
 		cible = get_up_point(map, map->lst[i]);
 		if (cible)
-			add_line(pixels, map->lst[i], cible);
+			add_line(pixels, map->lst[i], cible, 0);
 		i++;
 	}
 }
