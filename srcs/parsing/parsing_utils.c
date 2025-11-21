@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:15:41 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/17 13:26:59 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:42:06 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,15 @@ unsigned long	get_color_from_string(char *color)
 		return (DEFAULT_COLOR);
 	i = 2;
 	converted = 0;
-	while (color[i] && ft_strchr(base, color[i]) != NULL)
+	while (color[i] && ft_strchr(base, ft_toupper(color[i])) != NULL)
 	{
 		converted = converted * 16 + (ft_strchr(base,
-										  ft_toupper(color[i])) - base);
+					ft_toupper(color[i])) - base);
 		i++;
 	}
-	if (i != 2)
+	if (i > 2)
 	{
-		converted = converted * 16 + (ft_strchr(base, 'F') - base);
-		converted = converted * 16 + (ft_strchr(base, 'F') - base);
+		converted = (converted << 8) | 0xFF;
 	}
 	return (converted);
 }
@@ -91,7 +90,8 @@ int	get_number_point(int fd)
 		{
 			while (res[nb_line])
 			{
-				if (res[nb_line] != ' ' && (res[nb_line + 1] == ' ' || res[nb_line + 1] == 0))
+				if (res[nb_line] != ' ' && (res[nb_line + 1] == ' '
+						|| res[nb_line + 1] == 0))
 					nb_tot++;
 				nb_line++;
 			}
@@ -101,18 +101,7 @@ int	get_number_point(int fd)
 		free(res);
 		res = get_next_line(fd);
 	}
-	nb_tot = nb_tot * nb_line;
-	return (nb_tot);
-}
-
-int	add_point_static_lst(t_point **list, t_point *point,int x, int y)
-{
-	static int	i = 0;
-
-	point->x = x;
-	point->y = y;
-	list[i++] = point;
-	return (0);
+	return (nb_tot * nb_line);
 }
 
 t_point	*get_first_point(char *parsed_line)
@@ -133,4 +122,3 @@ t_point	*get_first_point(char *parsed_line)
 		point->color = get_color_from_string(&parsed_line[i]);
 	return (point);
 }
-
