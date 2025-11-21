@@ -13,6 +13,11 @@
 #include "../../includes/fdf.h"
 #include <stdlib.h>
 
+/**
+ * @brief Free all point of the list and the list to avoid leaks
+ *
+ * @param lst List to free properly
+ */
 void	clear_point_lst(t_point **lst)
 {
 	int	i;
@@ -23,4 +28,5 @@ void	clear_point_lst(t_point **lst)
 		free(lst[i]);
 		i++;
 	}
+	free(lst);
 }

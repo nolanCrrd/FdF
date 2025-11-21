@@ -12,21 +12,31 @@
 
 #include "../../includes/fdf.h"
 
-void	switch_map_color(t_map *map)
+/**
+ * @brief Toggle second color of all point on the map
+ *
+ * @param lst list that contain all the point to edit
+ */
+void	switch_map_color(t_point **lst)
 {
 	int				i;
 	unsigned long	color_tmp;
 
 	i = 0;
-	while (map->lst[i])
+	while (lst[i])
 	{
-		color_tmp = map->lst[i]->color;
-		map->lst[i]->color = map->lst[i]->second_color;
-		map->lst[i]->second_color = color_tmp;
+		color_tmp = lst[i]->color;
+		lst[i]->color = lst[i]->second_color;
+		lst[i]->second_color = color_tmp;
 		i++;
 	}
 }
 
+/**
+ * @brief Set to all point of a map their second color based on the relief
+ *
+ * @param map Map to edit
+ */
 void	map_fill_relief_color(t_map *map)
 {
 	int	altitude_delta;
@@ -54,6 +64,11 @@ void	map_fill_relief_color(t_map *map)
 	}
 }
 
+/**
+ * @brief Init the map structure with all default value
+ *
+ * @param map Map to init
+ */
 void	map_init(t_map *map)
 {
 	map->map_width = 0;

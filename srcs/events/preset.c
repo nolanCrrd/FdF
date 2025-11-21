@@ -12,6 +12,14 @@
 
 #include "../../includes/fdf.h"
 
+/**
+ * @brief Set all angles of the map to the given values
+ *
+ * @param mlx All update information
+ * @param angle_x New value for angleX
+ * @param angle_y same for angleY
+ * @param angle_z same for angleZ 
+ */
 void	set_preset(t_update_info *mlx, float angle_x,
 	float angle_y, float angle_z)
 {

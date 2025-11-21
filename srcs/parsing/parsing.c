@@ -15,7 +15,15 @@
 #include "../../includes/get_next_line_bonus.h"
 #include <stdlib.h>
 
-void	clean_exit(int fd, char *line, t_point **lst, char *msg)
+/**
+ * @brief Allow to exit the program from parsing with no leaks
+ *
+ * @param fd Fd of the failed file
+ * @param line Current line of the fd
+ * @param lst All the point already created
+ * @param msg Error message to print
+ */
+static void	clean_exit(int fd, char *line, t_point **lst, char *msg)
 {
 	char	*line_clear;
 
@@ -31,16 +39,29 @@ void	clean_exit(int fd, char *line, t_point **lst, char *msg)
 	exit(1);
 }
 
-static int	add_point_static_lst(t_point **list, t_point *point, int x, int y)
+/**
+ * @brief Add a point to the list of point (from where it stoped before)
+ *
+ * @param list List where to add a point
+ * @param point New point
+ * @param x X of point
+ * @param y Y of point
+ */
+static void	add_point_static_lst(t_point **list, t_point *point, int x, int y)
 {
 	static int	i = 0;
 
 	point->x = x;
 	point->y = y;
 	list[i++] = point;
-	return (0);
 }
 
+/**
+ * @brief Try to reset max / min altitude of the map with the given point's one
+ *
+ * @param map Concerned map
+ * @param point Point that maybe the one
+ */
 static void	fill_altitude_map(t_map *map, t_point *point)
 {
 	if (point->altitude > map->map_max_altitude)
@@ -49,6 +70,14 @@ static void	fill_altitude_map(t_map *map, t_point *point)
 		map->map_min_altitude = point->altitude;
 }
 
+/**
+ * @brief Create all the point of the map
+ *
+ * @param map Concerned map
+ * @param fd File descriptor currently parsed
+ * @param line The line to parse
+ * @param y Line number in the file
+ */
 void	create_point_line(t_map *map, int fd, char *line, int y)
 {
 	int		i;
@@ -77,6 +106,12 @@ void	create_point_line(t_map *map, int fd, char *line, int y)
 		map->map_width = current_x;
 }
 
+/**
+ * @brief Parse all the given file to create the map
+ *
+ * @param map Map to fill with all data
+ * @param fd File descriptor to read
+ */
 void	parsing_opti(t_map *map, int fd)
 {
 	char	*gnl_res;

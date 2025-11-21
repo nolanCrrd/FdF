@@ -17,6 +17,14 @@ static float	get_radian(float angle)
 	return (angle * M_PI / 180);
 }
 
+/**
+ * @brief Edit all the current point's projection matrice
+ *
+ * @param current Point to edit
+ * @param angle_x Angle x of the map
+ * @param angle_y Angle y of the map
+ * @param angle_z Angle z of the map
+ */
 static void	rotate_point(t_point *current, float angle_x,
 	float angle_y, float angle_z)
 {

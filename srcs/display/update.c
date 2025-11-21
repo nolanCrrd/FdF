@@ -13,6 +13,11 @@
 #include "../../includes/fdf.h"
 #include <stdlib.h>
 
+/**
+ * @brief Update the map projection data based on the rotations update
+ *
+ * @param mlx All update datas
+ */
 static void	update_map_projection(t_update_info *mlx)
 {
 	if (mlx->angle_x_move != 0 || mlx->angle_z_move != 0
@@ -30,6 +35,11 @@ static void	update_map_projection(t_update_info *mlx)
 	}
 }
 
+/**
+ * @brief Update the map position based on the movements update
+ *
+ * @param mlx All update datas
+ */
 static void	update_map_move(t_update_info *mlx)
 {
 	int	i;
@@ -67,7 +77,7 @@ void	update(void *mlxv)
 
 	mlx = (t_update_info *) mlxv;
 	if (mlx->to_switch_color)
-		switch_map_color(mlx->map);
+		switch_map_color(mlx->map->lst);
 	update_map(mlx);
 	if (mlx->to_update || mlx->to_switch_color)
 	{

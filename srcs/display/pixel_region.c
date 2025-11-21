@@ -13,6 +13,15 @@
 #include "../../includes/fdf.h"
 #include "../../includes/libft.h"
 
+/**
+ * @brief Initialise the case of the DDA (deltaY <= deltaX or not)
+ *
+ * @param origin Original point of the line
+ * @param dest Final point of the line
+ * @param x_inc Value of X incrmentation to set
+ * @param y_inc Value of Y incrementation to set
+ * @return Number of step for the line
+ */
 static int	init_case(t_point *origin, t_point *dest, float *x_inc,
 	float *y_inc)
 {
@@ -37,6 +46,14 @@ static int	init_case(t_point *origin, t_point *dest, float *x_inc,
 	return (nb_step);
 }
 
+/**
+ * @brief Add all pixel needed to make a line between 2 points
+ *
+ * @param pixels List of pixels to edit
+ * @param origin Start of the line
+ * @param dest End of the line
+ * @param i Number of step already done
+ */
 void	add_line(mlx_color *pixels, t_point *origin, t_point *dest, int i)
 {
 	float	current_x;
@@ -66,6 +83,12 @@ void	add_line(mlx_color *pixels, t_point *origin, t_point *dest, int i)
 	}
 }
 
+/**
+ * @brief Add all pixel for all line between all points
+ *
+ * @param map Concerned map
+ * @param pixels List of pixels to edit
+ */
 void	add_line_pixels(t_map *map, mlx_color *pixels)
 {
 	int		i;

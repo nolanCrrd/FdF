@@ -12,6 +12,11 @@
 
 #include "../../includes/fdf.h"
 
+/**
+ * @brief Init the structure update_info with all the defaults values
+ *
+ * @param update_info Update_info to init
+ */
 void	init_update_info(t_update_info *update_info)
 {
 	update_info->to_update = 1;

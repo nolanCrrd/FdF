@@ -12,6 +12,13 @@
 
 #include "../../includes/fdf.h"
 
+/**
+ * @brief Return the point on the right of the given one
+ *
+ * @param map Concerned map
+ * @param origin Concerned point
+ * @return Correct point / NULL if not present
+ */
 t_point	*get_right_point(t_map *map, t_point *origin)
 {
 	int	i;
@@ -25,6 +32,13 @@ t_point	*get_right_point(t_map *map, t_point *origin)
 	return (NULL);
 }
 
+/**
+ * @brief Return the point on the left of the given one
+ *
+ * @param map Concerned map
+ * @param origin Concerned point
+ * @return Correct point / NULL if not present
+ */
 t_point	*get_up_point(t_map *map, t_point *origin)
 {
 	int	i;
@@ -38,6 +52,16 @@ t_point	*get_up_point(t_map *map, t_point *origin)
 	return (NULL);
 }
 
+/**
+ * @brief Give the correct value of the colro between two other based on
+ * the advencement in the shade
+ *
+ * @param origin Origin color
+ * @param dest Final color of the shade
+ * @param step Advecement in the shade
+ * @param nb_step Number of step in total
+ * @return Correct shade
+ */
 unsigned long	get_color_smooth(unsigned long origin, unsigned long dest,
 	int step, int nb_step)
 {

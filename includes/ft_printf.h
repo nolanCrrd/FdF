@@ -45,7 +45,9 @@ char	*ft_addtoa(unsigned long long addr);
 char	*get_str_or_null(char	*str);
 
 // ft_printf
-int		ft_dprintf(int fd, const char *fmt, ...)__attribute__((format(printf, 2, 3)));
-int		ft_printf(const char *fmt, ...)__attribute__((format(printf, 1, 2)));
+int		ft_dprintf(int fd, const char *fmt, ...)__attribute__(
+			(format(printf, 2, 3)));
+int		ft_printf(const char *fmt, ...)__attribute__(
+			(format(printf, 1, 2)));
 
 #endif

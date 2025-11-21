@@ -17,6 +17,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+/**
+ * @brief Return the fd of the given file path
+ *
+ * @param path File to open
+ * @return fd
+ */
 int	open_file(char	*path)
 {
 	int	fd;
@@ -30,6 +36,12 @@ int	open_file(char	*path)
 	return (fd);
 }
 
+/**
+ * @brief Return the first value of altitude encountered in the string
+ *
+ * @param altitude String where extract the altitude
+ * @return altitude
+ */
 int	get_altitude_from_string(char *altitude)
 {
 	int	converted;
@@ -49,6 +61,12 @@ int	get_altitude_from_string(char *altitude)
 	return (converted * sign);
 }
 
+/**
+ * @brief Return the first color encountered in the string (0xABCDEF(FF))
+ *
+ * @param color String where extract the color
+ * @return unsigned long int that represant the color
+ */
 unsigned long	get_color_from_string(char *color)
 {
 	unsigned long	converted;
@@ -75,6 +93,12 @@ unsigned long	get_color_from_string(char *color)
 	return (converted);
 }
 
+/**
+ * @brief Return the number of point for the map that are represented in the fd
+ *
+ * @param fd 
+ * @return 
+ */
 int	get_number_point(int fd)
 {
 	int		nb_tot;
