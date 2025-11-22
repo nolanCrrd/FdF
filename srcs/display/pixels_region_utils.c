@@ -21,7 +21,6 @@
  */
 t_point	*get_right_point(t_map *map, t_point *origin)
 {
-	int	i;
 	int	cible_x;
 	int	cible_y;
 
@@ -41,7 +40,6 @@ t_point	*get_right_point(t_map *map, t_point *origin)
  */
 t_point	*get_up_point(t_map *map, t_point *origin)
 {
-	int	i;
 	int	cible_x;
 	int	cible_y;
 

@@ -40,12 +40,10 @@ void	switch_map_color(t_point **lst)
 void	map_fill_relief_color(t_map *map)
 {
 	int	altitude_delta;
-	int	altitude_med;
 	int	i;
 
 	altitude_delta = map->map_max_altitude - map->map_min_altitude;
 	i = 0;
-	altitude_med = (map->map_max_altitude + map->map_min_altitude) / 3;
 	while (map->lst[i])
 	{
 		if (map->lst[i]->altitude <= 0)

@@ -26,7 +26,6 @@ void	open_window(t_map *map)
 {
 	mlx_context				mlx;
 	mlx_window				win;
-	int						i;
 	t_update_info			update_info;
 	mlx_window_create_info	info;
 

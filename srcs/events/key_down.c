@@ -67,9 +67,12 @@ void	move_hook(int key, void *update_info)
 	t_update_info	*mlx;
 
 	mlx = (t_update_info *)update_info;
-	rotate_keys(key, mlx);
+	if (BONUS)
+	{
+		rotate_keys(key, mlx);
+		view_preset(key, mlx);
+	}
 	translate_key(key, mlx);
-	view_preset(key, mlx);
 }
 
 void	close_hook(int key, void *mlx)

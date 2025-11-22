@@ -53,9 +53,9 @@ void	update_projection(t_map *map)
 	float	angle_z;
 	t_point	*current;
 
-	angle_x = RAD(map->angle_x);
-	angle_y = RAD(map->angle_y);
-	angle_z = RAD(map->angle_z);
+	angle_x = get_radian(map->angle_x);
+	angle_y = get_radian(map->angle_y);
+	angle_z = get_radian(map->angle_z);
 	i = 0;
 	while (map->lst[i])
 	{

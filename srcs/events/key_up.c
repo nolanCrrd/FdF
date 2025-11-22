@@ -17,11 +17,11 @@ void	stop_move_hook(int key, void *update_info)
 	t_update_info	*mlx;
 
 	mlx = (t_update_info *) update_info;
-	if (key == KEY_j || key == KEY_k)
+	if (key == KEY_J || key == KEY_K)
 		mlx->y_move = 0;
-	if (key == KEY_h || key == KEY_l)
+	if (key == KEY_H || key == KEY_L)
 		mlx->x_move = 0;
-	if (key == KEY_minus || key == KEY_plus)
+	if (key == KEY_MINUS || key == KEY_PLUS)
 		mlx->scale_move = 0;
 	if (key == KEY_SHIFT)
 		mlx->move_modifier = 0;
@@ -29,6 +29,6 @@ void	stop_move_hook(int key, void *update_info)
 		mlx->angle_x_move = 0;
 	if (key == KEY_LEFT || key == KEY_RIGHT)
 		mlx->angle_y_move = 0;
-	if (key == KEY_w || key == KEY_s)
+	if (key == KEY_W || key == KEY_S)
 		mlx->angle_z_move = 0;
 }

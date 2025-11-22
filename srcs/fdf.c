@@ -19,7 +19,6 @@ int	main(int argc, char **argv)
 {
 	t_map	map;
 	int		fd;
-	int		i;
 	int		nb_point;
 
 	if (argc != 2)

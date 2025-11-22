@@ -100,6 +100,10 @@ typedef struct s_update_info
 # define MID_COLOR 0xc78316FF
 # define MAX_COLOR 0x752502FF
 
+#  ifndef BONUS
+#   define BONUS 0
+#  endif
+
 # define X 0
 # define Y 1
 # define Z 2
