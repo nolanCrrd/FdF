@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_dprintf(2, "1 argument expected %i given", argc - 1);
+		ft_dprintf(2, "1 argument expected %i given\n", argc - 1);
 		exit(1);
 	}
 	fd = open_file(argv[1]);

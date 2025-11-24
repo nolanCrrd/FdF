@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
-#include <stdio.h>
 
 static void	rotate_keys(int key, t_update_info *mlx)
 {
@@ -76,6 +75,11 @@ void	move_hook(int key, void *update_info)
 	{
 		rotate_keys(key, mlx);
 		view_preset(key, mlx);
+		if (key == KEY_O)
+		{
+			mlx->show_menu = (mlx->show_menu == 0);
+			mlx->to_update = 1;
+		}
 	}
 	translate_key(key, mlx);
 }

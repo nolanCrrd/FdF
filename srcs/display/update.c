@@ -89,9 +89,10 @@ void	update(void *mlxv)
 		mlx->to_update = 0;
 		free(mlx->pixels);
 		mlx->pixels = get_all_pixel(mlx->map);
+		mlx_set_image_region(*mlx->mlx, *mlx->img, 0, 0, WIN_W, WIN_H, mlx->pixels);
 		mlx_clear_window(*mlx->mlx, *mlx->win, (mlx_color){.rgba = 0});
-		mlx_pixel_put_region(*mlx->mlx, *mlx->win, 0, 0,
-			WIN_W, WIN_H, mlx->pixels);
-		draw_menu(mlx);
+		mlx_put_image_to_window(*mlx->mlx, *mlx->win, *mlx->img, 0, 0);
+		if (mlx->show_menu)
+			draw_menu(mlx);
 	}
 }

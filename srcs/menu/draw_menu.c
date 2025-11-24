@@ -34,7 +34,6 @@ void	draw_menu(t_update_info *mlx)
 	i = 0;
 	while (i < WIN_H * MENU_W)
 		menu_pixels[i++] = (mlx_color){ .rgba = 0x444444FF};
-	mlx_set_font_scale(*mlx->mlx, "default", 16.0f);
 	mlx_pixel_put_region(*mlx->mlx, *mlx->win, 0, 0, MENU_W, WIN_H, menu_pixels);
 	draw_text(mlx);
 }

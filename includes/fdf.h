@@ -49,6 +49,7 @@ typedef struct s_update_info
 {
 	mlx_context	*mlx;
 	mlx_window	*win;
+	mlx_image	*img;
 	t_map		*map;
 	int			x_move;
 	int			y_move;
@@ -61,6 +62,7 @@ typedef struct s_update_info
 	int			to_switch_color;
 	int			to_update;
 	int			preset_changed;
+	int			show_menu;
 	mlx_color	*pixels;
 }	t_update_info;
 
@@ -75,6 +77,7 @@ typedef struct s_update_info
 # define KEY_L 15
 # define KEY_W 26
 # define KEY_S 22
+# define KEY_O 18
 # define KEY_PLUS 46
 # define KEY_MINUS 45
 # define KEY_ZP 48
