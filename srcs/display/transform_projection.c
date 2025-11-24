@@ -60,7 +60,7 @@ void	update_projection(t_map *map)
 	while (map->lst[i])
 	{
 		current = map->lst[i];
-		current->proj[0][X] = (current->x - map->map_width / 2.0f) * 20 + MENU_W;
+		current->proj[0][X] = (current->x - map->map_width / 2.0f) * 20;
 		current->proj[0][Y] = (current->y - map->map_width / 2.0f) * 20;
 		current->proj[0][Z] = current->altitude * map->z_scaling;
 		rotate_point(current, angle_x, angle_y, angle_z);

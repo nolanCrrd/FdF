@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:25:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/24 14:01:48 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/24 20:50:41 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_update_info
 
 # define WIN_H 1080
 # define WIN_W 1920
-# define MENU_W 400
+# define MENU_W 450
 
 # define KEY_ESC 41
 # define KEY_H 11
@@ -148,6 +148,7 @@ void			draw_all_line(t_update_info *mlx);
 mlx_color		*get_all_pixel(t_map *map);
 
 // Menu
+void	write_map_info(t_update_info *mlx, mlx_color color);
 void	draw_menu(t_update_info *mlx);
 
 // Display

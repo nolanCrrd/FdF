@@ -64,6 +64,8 @@ static void	view_preset(int key, t_update_info *mlx)
 		set_preset(mlx, -45, 35, -150);
 	if (key == KEY_5)
 		set_preset(mlx, 0, 0, 0);
+	if (key == KEY_6)
+		set_preset(mlx, 90, 0, 0);
 }
 
 void	move_hook(int key, void *update_info)

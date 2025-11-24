@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 14:02:26 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 10:07:43 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:03:07 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	init_window_info(mlx_window_create_info *info)
 static void	set_all_hook(mlx_context *mlx, mlx_window *win,
 	t_update_info *update_info)
 {
-
 	mlx_add_loop_hook(*mlx, update, update_info);
 	mlx_on_event(*mlx, *win, MLX_KEYDOWN, move_hook, update_info);
 	mlx_on_event(*mlx, *win, MLX_KEYUP, stop_move_hook, update_info);

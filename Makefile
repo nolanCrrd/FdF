@@ -26,6 +26,7 @@ SRCS = $(SRCS_FOLDER)display/pixels_region.c \
 	$(SRCS_FOLDER)struct_managment/point.c \
 	$(SRCS_FOLDER)struct_managment/update_info.c \
 	$(SRCS_FOLDER)menu/draw_menu.c \
+	$(SRCS_FOLDER)menu/write_map_info.c \
 	$(SRCS_FOLDER)fdf.c \
 
 BONUS_SRCS = $(SRCS)
@@ -44,6 +45,8 @@ LIBS_SRCS = $(LIBS_FOLDER)ft_printf/ft_printf.c \
 	$(LIBS_FOLDER)libft/ft_strchr.c \
 	$(LIBS_FOLDER)libft/ft_strlen.c \
 	$(LIBS_FOLDER)libft/ft_toupper.c \
+	$(LIBS_FOLDER)libft/ft_itoa.c \
+	$(LIBS_FOLDER)libft/ft_strjoin.c \
 
 SRCS_OBJS = $(addprefix $(OBJECTS_FOLDER),$(SRCS:.c=.o))
 LIBS_OBJS = $(addprefix $(OBJECTS_FOLDER),$(LIBS_SRCS:.c=.o))
