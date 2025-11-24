@@ -74,6 +74,7 @@ void	map_init(t_map *map)
 	map->map_max_altitude = 0;
 	map->map_min_altitude = 0;
 	map->scaling = 0.1;
+	map->z_scaling = 1;
 	map->angle_z = 30;
 	map->angle_y = -35;
 	map->angle_x = 45;

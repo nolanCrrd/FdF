@@ -27,6 +27,7 @@ void	init_update_info(t_update_info *update_info)
 	update_info->y_move = 0;
 	update_info->move_modifier = 0;
 	update_info->scale_move = 0;
+	update_info->z_scale_move = 0;
 	update_info->to_switch_color = 0;
 	update_info->preset_changed = 0;
 }

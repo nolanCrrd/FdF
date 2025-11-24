@@ -25,6 +25,7 @@ SRCS = $(SRCS_FOLDER)display/pixels_region.c \
 	$(SRCS_FOLDER)struct_managment/map.c \
 	$(SRCS_FOLDER)struct_managment/point.c \
 	$(SRCS_FOLDER)struct_managment/update_info.c \
+	$(SRCS_FOLDER)menu/draw_menu.c \
 	$(SRCS_FOLDER)fdf.c \
 
 BONUS_SRCS = $(SRCS)
@@ -66,9 +67,11 @@ $(BONUS_OBJECTS_FOLDER)%.o: %.c
 
 clean:
 	$(RM) $(OBJECTS_FOLDER)
+	$(RM) $(BONUS_OBJECTS_FOLDER)
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) bonus
 
 re: fclean all
 

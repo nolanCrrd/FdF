@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:25:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 12:05:39 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:01:48 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map
 	int		x_offset;
 	int		y_offset;
 	float	scaling;
+	float	z_scaling;
 }	t_map;
 
 typedef struct s_update_info
@@ -56,6 +57,7 @@ typedef struct s_update_info
 	float		angle_y_move;
 	float		angle_z_move;
 	float		scale_move;
+	float		z_scale_move;
 	int			to_switch_color;
 	int			to_update;
 	int			preset_changed;
@@ -64,6 +66,7 @@ typedef struct s_update_info
 
 # define WIN_H 1080
 # define WIN_W 1920
+# define MENU_W 400
 
 # define KEY_ESC 41
 # define KEY_H 11
@@ -74,6 +77,8 @@ typedef struct s_update_info
 # define KEY_S 22
 # define KEY_PLUS 46
 # define KEY_MINUS 45
+# define KEY_ZP 48
+# define KEY_ZM 47
 # define KEY_SHIFT 225
 # define KEY_UP 82
 # define KEY_DOWN 81
@@ -138,6 +143,9 @@ t_point			*get_right_point(t_map *map, t_point *origin);
 t_point			*get_up_point(t_map *map, t_point *origin);
 void			draw_all_line(t_update_info *mlx);
 mlx_color		*get_all_pixel(t_map *map);
+
+// Menu
+void	draw_menu(t_update_info *mlx);
 
 // Display
 void			update(void *mlxv);

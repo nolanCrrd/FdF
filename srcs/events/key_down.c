@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
+#include <stdio.h>
 
 static void	rotate_keys(int key, t_update_info *mlx)
 {
@@ -40,8 +41,12 @@ static void	translate_key(int key, t_update_info *mlx)
 		mlx->y_move = -MOVE_SPEED;
 	if (key == KEY_PLUS)
 		mlx->scale_move = 0.005;
-	if (key == KEY_PLUS)
+	if (key == KEY_MINUS)
 		mlx->scale_move = -0.005;
+	if (key == KEY_ZP)
+		mlx->z_scale_move = 0.1;
+	if (key == KEY_ZM)
+		mlx->z_scale_move = -0.1;
 	if (key == KEY_SHIFT)
 		mlx->move_modifier = 1;
 	if (key == KEY_TAB)
