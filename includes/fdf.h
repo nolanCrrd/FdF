@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:25:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/24 20:50:41 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:35:50 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_update_info
 	int			to_update;
 	int			preset_changed;
 	int			show_menu;
+	int			show_vertical;
+	int			show_horizontal;
 	mlx_color	*pixels;
 }	t_update_info;
 
@@ -78,6 +80,8 @@ typedef struct s_update_info
 # define KEY_W 26
 # define KEY_S 22
 # define KEY_O 18
+# define KEY_Z 29
+# define KEY_X 27
 # define KEY_PLUS 46
 # define KEY_MINUS 45
 # define KEY_ZP 48
@@ -144,8 +148,7 @@ void			set_preset(t_update_info *mlx, float angle_x,
 // Prepare display
 t_point			*get_right_point(t_map *map, t_point *origin);
 t_point			*get_up_point(t_map *map, t_point *origin);
-void			draw_all_line(t_update_info *mlx);
-mlx_color		*get_all_pixel(t_map *map);
+mlx_color		*get_all_pixel(t_map *map, int vertical, int horizontal);
 
 // Menu
 void	write_map_info(t_update_info *mlx, mlx_color color);
@@ -156,7 +159,7 @@ void			update(void *mlxv);
 void			open_window(t_map *map);
 
 // Keyboard event
-void			move_hook(int key, void *update_info);
+void			all_hook(int key, void *update_info);
 void			stop_move_hook(int key, void *update_info);
 void			close_hook(int key, void *mlx);
 void			window_close_hook(int event, void *mlx);

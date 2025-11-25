@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 09:07:51 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/20 18:02:20 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:37:18 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,26 @@ static void	view_preset(int key, t_update_info *mlx)
 		set_preset(mlx, 90, 0, 0);
 }
 
-void	move_hook(int key, void *update_info)
+static void	misc_event(int key, t_update_info *mlx)
+{
+	if (key == KEY_O && BONUS)
+	{
+		mlx->show_menu = (mlx->show_menu == 0);
+		mlx->to_update = 1;
+	}
+	if (key == KEY_Z)
+	{
+		mlx->show_horizontal = !mlx->show_horizontal;
+		mlx->to_update = 1;
+	}
+	if (key == KEY_X)
+	{
+		mlx->show_vertical = !mlx->show_vertical;
+		mlx->to_update = 1;
+	}
+}
+
+void	all_hook(int key, void *update_info)
 {
 	t_update_info	*mlx;
 
@@ -77,17 +96,9 @@ void	move_hook(int key, void *update_info)
 	{
 		rotate_keys(key, mlx);
 		view_preset(key, mlx);
-		if (key == KEY_O)
-		{
-			mlx->show_menu = (mlx->show_menu == 0);
-			mlx->to_update = 1;
-		}
 	}
+	misc_event(key, mlx);
 	translate_key(key, mlx);
-}
-
-void	close_hook(int key, void *mlx)
-{
 	if (key == KEY_ESC)
-		mlx_loop_end((mlx_context) mlx);
+		mlx_loop_end(*mlx->mlx);
 }

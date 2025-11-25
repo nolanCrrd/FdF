@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:51:55 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/24 21:03:24 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:34:19 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	update(void *mlxv)
 		mlx->to_switch_color = 0;
 		mlx->to_update = 0;
 		free(mlx->pixels);
-		mlx->pixels = get_all_pixel(mlx->map);
+		mlx->pixels = get_all_pixel(mlx->map, mlx->show_vertical,
+				mlx->show_horizontal);
 		mlx_set_image_region(*mlx->mlx, *mlx->img, 0, 0, WIN_W, WIN_H,
 			mlx->pixels);
 		mlx_clear_window(*mlx->mlx, *mlx->win, (mlx_color){.rgba = 0});

@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 13:44:09 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/24 21:04:04 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:36:12 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void	draw_keymap(t_update_info *mlx, mlx_color color)
 	mlx_string_put(*mlx->mlx, *mlx->win, 20, 340, color, "1-4: Iso sides");
 	mlx_string_put(*mlx->mlx, *mlx->win, 20, 380, color, "5: Up view");
 	mlx_string_put(*mlx->mlx, *mlx->win, 20, 420, color, "6: Side view");
-	mlx_string_put(*mlx->mlx, *mlx->win, 20, 460, color, "o: toggle menu");
+	mlx_string_put(*mlx->mlx, *mlx->win, 20, 460, color,
+		"z: Toggle horizontal");
+	mlx_string_put(*mlx->mlx, *mlx->win, 20, 500, color, "x: Toggle Vertical");
+	mlx_string_put(*mlx->mlx, *mlx->win, 20, 540, color, "o: Toggle menu");
 }
 
 void	draw_menu(t_update_info *mlx)

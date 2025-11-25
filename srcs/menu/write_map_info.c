@@ -18,12 +18,17 @@ static char	*strjoin_float(char *txt, float x)
 {
 	char	*tmp;
 	char	*total;
+	char	*number;
 
-	total = ft_strjoin(txt, ft_itoa(x));
+	number = ft_itoa(x);
+	total = ft_strjoin(txt, number);
 	tmp = ft_strjoin(total, ",");
 	free(total);
-	total = ft_strjoin(tmp, ft_itoa((int)(x * 100) % 100));
+	free(number);
+	number = ft_itoa((int)(x * 100) % 100);
+	total = ft_strjoin(tmp, number);
 	free(tmp);
+	free(number);
 	return (total);
 }
 
