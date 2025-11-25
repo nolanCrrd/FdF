@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 09:07:51 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/20 18:02:20 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:37:18 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ static void	translate_key(int key, t_update_info *mlx)
 		mlx->y_move = -MOVE_SPEED;
 	if (key == KEY_PLUS)
 		mlx->scale_move = 0.005;
-	if (key == KEY_PLUS)
+	if (key == KEY_MINUS)
 		mlx->scale_move = -0.005;
+	if (key == KEY_ZP)
+		mlx->z_scale_move = 0.1;
+	if (key == KEY_ZM)
+		mlx->z_scale_move = -0.1;
 	if (key == KEY_SHIFT)
 		mlx->move_modifier = 1;
 	if (key == KEY_TAB)
@@ -60,9 +64,30 @@ static void	view_preset(int key, t_update_info *mlx)
 		set_preset(mlx, -45, 35, -150);
 	if (key == KEY_5)
 		set_preset(mlx, 0, 0, 0);
+	if (key == KEY_6)
+		set_preset(mlx, 90, 0, 0);
 }
 
-void	move_hook(int key, void *update_info)
+static void	misc_event(int key, t_update_info *mlx)
+{
+	if (key == KEY_O && BONUS)
+	{
+		mlx->show_menu = (mlx->show_menu == 0);
+		mlx->to_update = 1;
+	}
+	if (key == KEY_Z)
+	{
+		mlx->show_horizontal = !mlx->show_horizontal;
+		mlx->to_update = 1;
+	}
+	if (key == KEY_X)
+	{
+		mlx->show_vertical = !mlx->show_vertical;
+		mlx->to_update = 1;
+	}
+}
+
+void	all_hook(int key, void *update_info)
 {
 	t_update_info	*mlx;
 
@@ -72,11 +97,8 @@ void	move_hook(int key, void *update_info)
 		rotate_keys(key, mlx);
 		view_preset(key, mlx);
 	}
+	misc_event(key, mlx);
 	translate_key(key, mlx);
-}
-
-void	close_hook(int key, void *mlx)
-{
 	if (key == KEY_ESC)
-		mlx_loop_end((mlx_context) mlx);
+		mlx_loop_end(*mlx->mlx);
 }

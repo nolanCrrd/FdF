@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_region.c                                     :+:      :+:    :+:   */
+/*   pixels_region.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:07:41 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 11:58:31 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:34:34 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	add_line(mlx_color *pixels, t_point *origin, t_point *dest, int i)
  * @param map Concerned map
  * @param pixels List of pixels to edit
  */
-void	add_line_pixels(t_map *map, mlx_color *pixels)
+void	add_line_pixels(t_map *map, mlx_color *pixels,
+	int vertical, int horizontal)
 {
 	int		i;
 	t_point	*cible;
@@ -97,12 +98,18 @@ void	add_line_pixels(t_map *map, mlx_color *pixels)
 	i = 0;
 	while (map->lst[i])
 	{
-		cible = get_right_point(map, map->lst[i]);
-		if (cible)
-			add_line(pixels, map->lst[i], cible, 0);
-		cible = get_up_point(map, map->lst[i]);
-		if (cible)
-			add_line(pixels, map->lst[i], cible, 0);
+		if (horizontal)
+		{
+			cible = get_right_point(map, map->lst[i]);
+			if (cible)
+				add_line(pixels, map->lst[i], cible, 0);
+		}
+		if (vertical)
+		{
+			cible = get_up_point(map, map->lst[i]);
+			if (cible)
+				add_line(pixels, map->lst[i], cible, 0);
+		}
 		i++;
 	}
 }
@@ -113,7 +120,7 @@ void	add_line_pixels(t_map *map, mlx_color *pixels)
  * @param map map information
  * @return Pixels to dislay
  */
-mlx_color	*get_all_pixel(t_map *map)
+mlx_color	*get_all_pixel(t_map *map, int vertical, int horizontal)
 {
 	mlx_color	*pixels;
 	int			i;
@@ -123,7 +130,7 @@ mlx_color	*get_all_pixel(t_map *map)
 
 	pixels = ft_calloc(WIN_W * WIN_H, sizeof(mlx_color));
 	i = 0;
-	add_line_pixels(map, pixels);
+	add_line_pixels(map, pixels, vertical, horizontal);
 	while (map->lst[i])
 	{
 		to_draw = 1;

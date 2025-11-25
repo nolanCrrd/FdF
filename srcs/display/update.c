@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 11:51:55 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 12:06:20 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:34:19 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@
 static void	update_map_projection(t_update_info *mlx)
 {
 	if (mlx->angle_x_move != 0 || mlx->angle_z_move != 0
-		|| mlx->angle_y_move != 0 || mlx->preset_changed)
+		|| mlx->angle_y_move != 0 || mlx->preset_changed || mlx->z_scale_move)
 	{
+		if (mlx->map->z_scaling + mlx->z_scale_move > 0)
+			mlx->map->z_scaling += mlx->z_scale_move * (mlx->move_modifier
+					* MODIFIER_SPEED + 1);
 		mlx->map->angle_x += mlx->angle_x_move * (mlx->move_modifier
 				* MODIFIER_SPEED + 1);
 		mlx->map->angle_y += mlx->angle_y_move * (mlx->move_modifier
@@ -44,7 +47,8 @@ static void	update_map_move(t_update_info *mlx)
 {
 	int	i;
 
-	if (mlx->y_move != 0 || mlx->x_move != 0 || mlx->scale_move != 0)
+	if (mlx->y_move != 0 || mlx->x_move != 0 || mlx->scale_move != 0
+		|| mlx->z_scale_move != 0)
 	{
 		mlx->map->x_offset += mlx->x_move * (mlx->move_modifier
 				* MODIFIER_SPEED + 1);
@@ -84,9 +88,13 @@ void	update(void *mlxv)
 		mlx->to_switch_color = 0;
 		mlx->to_update = 0;
 		free(mlx->pixels);
-		mlx->pixels = get_all_pixel(mlx->map);
+		mlx->pixels = get_all_pixel(mlx->map, mlx->show_vertical,
+				mlx->show_horizontal);
+		mlx_set_image_region(*mlx->mlx, *mlx->img, 0, 0, WIN_W, WIN_H,
+			mlx->pixels);
 		mlx_clear_window(*mlx->mlx, *mlx->win, (mlx_color){.rgba = 0});
-		mlx_pixel_put_region(*mlx->mlx, *mlx->win, 0, 0,
-			WIN_W, WIN_H, mlx->pixels);
+		mlx_put_image_to_window(*mlx->mlx, *mlx->win, *mlx->img, 0, 0);
+		if (mlx->show_menu)
+			draw_menu(mlx);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:25:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 12:05:39 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:35:50 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ typedef struct s_map
 	int		x_offset;
 	int		y_offset;
 	float	scaling;
+	float	z_scaling;
 }	t_map;
 
 typedef struct s_update_info
 {
 	mlx_context	*mlx;
 	mlx_window	*win;
+	mlx_image	*img;
 	t_map		*map;
 	int			x_move;
 	int			y_move;
@@ -56,14 +58,19 @@ typedef struct s_update_info
 	float		angle_y_move;
 	float		angle_z_move;
 	float		scale_move;
+	float		z_scale_move;
 	int			to_switch_color;
 	int			to_update;
 	int			preset_changed;
+	int			show_menu;
+	int			show_vertical;
+	int			show_horizontal;
 	mlx_color	*pixels;
 }	t_update_info;
 
 # define WIN_H 1080
 # define WIN_W 1920
+# define MENU_W 450
 
 # define KEY_ESC 41
 # define KEY_H 11
@@ -72,8 +79,13 @@ typedef struct s_update_info
 # define KEY_L 15
 # define KEY_W 26
 # define KEY_S 22
+# define KEY_O 18
+# define KEY_Z 29
+# define KEY_X 27
 # define KEY_PLUS 46
 # define KEY_MINUS 45
+# define KEY_ZP 48
+# define KEY_ZM 47
 # define KEY_SHIFT 225
 # define KEY_UP 82
 # define KEY_DOWN 81
@@ -136,15 +148,18 @@ void			set_preset(t_update_info *mlx, float angle_x,
 // Prepare display
 t_point			*get_right_point(t_map *map, t_point *origin);
 t_point			*get_up_point(t_map *map, t_point *origin);
-void			draw_all_line(t_update_info *mlx);
-mlx_color		*get_all_pixel(t_map *map);
+mlx_color		*get_all_pixel(t_map *map, int vertical, int horizontal);
+
+// Menu
+void	write_map_info(t_update_info *mlx, mlx_color color);
+void	draw_menu(t_update_info *mlx);
 
 // Display
 void			update(void *mlxv);
 void			open_window(t_map *map);
 
 // Keyboard event
-void			move_hook(int key, void *update_info);
+void			all_hook(int key, void *update_info);
 void			stop_move_hook(int key, void *update_info);
 void			close_hook(int key, void *mlx);
 void			window_close_hook(int event, void *mlx);

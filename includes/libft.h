@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 21:07:35 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/10/16 11:24:16 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/24 13:53:08 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ char	*ft_strchr(const char *s, int c);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_itoa(int n);
+void	*ft_memset(void *b, int c, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

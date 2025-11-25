@@ -6,11 +6,10 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:15:41 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/19 15:42:06 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:29:22 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line_bonus.h"
 #include "../../includes/fdf.h"
 #include "../../includes/libft.h"
 #include "../../includes/ft_printf.h"
@@ -30,7 +29,7 @@ int	open_file(char	*path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_dprintf(2, "fdf: %s: No such file or directory", path);
+		ft_dprintf(2, "fdf: %s: No such file or directory\n", path);
 		exit(1);
 	}
 	return (fd);
@@ -91,41 +90,6 @@ unsigned long	get_color_from_string(char *color)
 		converted = (converted << 8) | 0xFF;
 	}
 	return (converted);
-}
-
-/**
- * @brief Return the number of point for the map that are represented in the fd
- *
- * @param fd 
- * @return 
- */
-int	get_number_point(int fd)
-{
-	int		nb_tot;
-	char	*res;
-	int		nb_line;
-
-	res = get_next_line(fd);
-	nb_tot = 0;
-	nb_line = 0;
-	while (res != NULL)
-	{
-		if (nb_tot == 0)
-		{
-			while (res[nb_line])
-			{
-				if (res[nb_line] != ' ' && (res[nb_line + 1] == ' '
-						|| res[nb_line + 1] == 0))
-					nb_tot++;
-				nb_line++;
-			}
-			nb_line = 0;
-		}
-		nb_line += 1;
-		free(res);
-		res = get_next_line(fd);
-	}
-	return (nb_tot * nb_line);
 }
 
 t_point	*get_first_point(char *parsed_line)

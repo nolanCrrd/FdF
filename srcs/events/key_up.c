@@ -31,4 +31,6 @@ void	stop_move_hook(int key, void *update_info)
 		mlx->angle_y_move = 0;
 	if (key == KEY_W || key == KEY_S)
 		mlx->angle_z_move = 0;
+	if (key == KEY_ZP || key == KEY_ZM)
+		mlx->z_scale_move = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:33:04 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/21 09:55:04 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:30:06 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	create_point_line(t_map *map, int fd, char *line, int y)
 		{
 			current_point = get_first_point(&line[i]);
 			if (current_point == NULL)
-				clean_exit(fd, line, map->lst, "Malloc error");
+				clean_exit(fd, line, map->lst, "fdf: Malloc error\n");
 			add_point_static_lst(map->lst, current_point, current_x, y);
 			current_x++;
 			fill_altitude_map(map, current_point);
@@ -127,4 +127,5 @@ void	parsing_opti(t_map *map, int fd)
 		y++;
 	}
 	map->map_height = y;
+	close(fd);
 }
