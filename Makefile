@@ -9,7 +9,7 @@ LIBS_FOLDER = libs/
 INCLUDES_FOLDER = includes/
 OBJECTS_FOLDER = objects/
 BONUS_OBJECTS_FOLDER = bonus_objects/
-MLX = $(LIBS_FOLDER)MacroLibX-master/libmlx.so -lSDL2  \
+MLX = $(LIBS_FOLDER)MacroLibX/libmlx.so -lSDL2  \
 
 SRCS = $(SRCS_FOLDER)display/pixels_region.c \
 	$(SRCS_FOLDER)display/pixels_region_utils.c \
