@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 15:13:42 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/24 21:34:59 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:45:09 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	map_init(t_map *map)
 	map->map_min_altitude = 0;
 	map->scaling = 0.1;
 	map->z_scaling = 5;
-	map->angle_z = 30;
-	map->angle_y = -35;
-	map->angle_x = 45;
+	map->angle_z = 40;
+	map->angle_y = -20;
+	map->angle_x = 15;
 	map->x_offset = WIN_W / 2;
 	map->y_offset = WIN_H / 2;
 }

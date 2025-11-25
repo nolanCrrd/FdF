@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 09:07:51 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/25 10:37:18 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:39:22 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static void	translate_key(int key, t_update_info *mlx)
 static void	view_preset(int key, t_update_info *mlx)
 {
 	if (key == KEY_1)
-		set_preset(mlx, 45, -35, 30);
+		set_preset(mlx, 30, -15, 40);
 	if (key == KEY_2)
-		set_preset(mlx, 45, 35, -30);
+		set_preset(mlx, 30, 15, -40);
 	if (key == KEY_3)
-		set_preset(mlx, -45, -35, 150);
+		set_preset(mlx, -15, 20, 220);
 	if (key == KEY_4)
-		set_preset(mlx, -45, 35, -150);
+		set_preset(mlx, -15, -20, -220);
 	if (key == KEY_5)
 		set_preset(mlx, 0, 0, 0);
 	if (key == KEY_6)

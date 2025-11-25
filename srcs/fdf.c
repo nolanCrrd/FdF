@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:24:38 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/25 10:32:41 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:49:19 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int	check_valid(int argc, char **argv)
 	}
 	fd = open_file(argv[1]);
 	nb_point = get_number_point(fd);
+	close(fd);
 	if (nb_point < 0)
 	{
 		ft_dprintf(2, "fdf: Invalid map: It's not rectangular\n");
-		close(fd);
 		exit(1);
 	}
 	return (nb_point);
