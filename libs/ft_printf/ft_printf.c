@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:42:34 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/14 15:52:09 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:13:39 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	is_valid_format(char c)
 		|| c == 'x' || c == '%' || c == 'X' || c == 'p' || c == 'd');
 }
 
-void	print_correct_format(const char	*fmt, va_list *arg, long *nb_write, int fd)
+void	print_correct_format(const char	*fmt,
+	va_list *arg, long *nb_write, int fd)
 {
 	char	*buffer;
 	char	tmp;

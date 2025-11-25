@@ -6,15 +6,15 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 13:25:32 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/25 10:35:50 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 11:15:12 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libs/MacroLibX-master/includes/mlx.h"
-# include "../libs/MacroLibX-master/includes/mlx_extended.h"
+# include "../libs/MacroLibX/includes/mlx.h"
+# include "../libs/MacroLibX/includes/mlx_extended.h"
 # include <math.h>
 
 typedef struct s_point
@@ -112,9 +112,9 @@ typedef struct s_update_info
 # define MID_COLOR 0xc78316FF
 # define MAX_COLOR 0x752502FF
 
-#  ifndef BONUS
-#   define BONUS 0
-#  endif
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # define X 0
 # define Y 1
@@ -151,8 +151,8 @@ t_point			*get_up_point(t_map *map, t_point *origin);
 mlx_color		*get_all_pixel(t_map *map, int vertical, int horizontal);
 
 // Menu
-void	write_map_info(t_update_info *mlx, mlx_color color);
-void	draw_menu(t_update_info *mlx);
+void			write_map_info(t_update_info *mlx, mlx_color color);
+void			draw_menu(t_update_info *mlx);
 
 // Display
 void			update(void *mlxv);

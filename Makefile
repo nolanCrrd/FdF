@@ -9,7 +9,7 @@ LIBS_FOLDER = libs/
 INCLUDES_FOLDER = includes/
 OBJECTS_FOLDER = objects/
 BONUS_OBJECTS_FOLDER = bonus_objects/
-MLX = $(LIBS_FOLDER)MacroLibX/libmlx.so -lSDL2  \
+MLX = $(LIBS_FOLDER)MacroLibX/
 
 SRCS = $(SRCS_FOLDER)display/pixels_region.c \
 	$(SRCS_FOLDER)display/pixels_region_utils.c \
@@ -22,6 +22,7 @@ SRCS = $(SRCS_FOLDER)display/pixels_region.c \
 	$(SRCS_FOLDER)events/window_event.c \
 	$(SRCS_FOLDER)parsing/parsing.c \
 	$(SRCS_FOLDER)parsing/parsing_utils.c \
+	$(SRCS_FOLDER)parsing/check_map.c \
 	$(SRCS_FOLDER)struct_managment/map.c \
 	$(SRCS_FOLDER)struct_managment/point.c \
 	$(SRCS_FOLDER)struct_managment/update_info.c \
@@ -54,11 +55,11 @@ BONUS_OBJS = $(addprefix $(BONUS_OBJECTS_FOLDER),$(BONUS_SRCS:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(SRCS_OBJS) $(LIBS_OBJS)
-	$(CC) $(CFLAGS) $^ $(MLX) -lm -o $@
+$(NAME): $(MLX)libmlx.so $(SRCS_OBJS) $(LIBS_OBJS)
+	$(CC) $(CFLAGS) $^ $(MLX)libmlx.so -lSDL2 -lm -o $@
 
-bonus: $(BONUS_OBJS) $(LIBS_OBJS)
-	$(CC) $(CFLAGS) $^ $(MLX) -lm -o $@ 
+bonus: $(MLX)libmlx.so $(BONUS_OBJS) $(LIBS_OBJS)
+	$(CC) $(CFLAGS) $^ $(MLX)libmlx.so -lSDL2 -lm -o $@ 
 
 $(OBJECTS_FOLDER)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -68,6 +69,10 @@ $(BONUS_OBJECTS_FOLDER)%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I $(INCLUDES_FOLDER) -D BONUS=1 -c $< -o $@
 
+$(MLX)libmlx.so:
+	git clone https://github.com/seekrs/MacroLibX.git $(MLX)
+	make -C $(MLX) -j
+
 clean:
 	$(RM) $(OBJECTS_FOLDER)
 	$(RM) $(BONUS_OBJECTS_FOLDER)
@@ -75,6 +80,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) bonus
+	$(RM) $(MLX)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: ncorrear <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 10:25:05 by ncorrear          #+#    #+#             */
-/*   Updated: 2025/11/25 10:33:26 by ncorrear         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:53:35 by ncorrear         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	get_number_point(int fd)
 	int		prec_width;
 	char	*gnl;
 	int		width;
-	int		i;
 
 	nb_point = 0;
 	width = 0;
