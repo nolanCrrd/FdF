@@ -27,6 +27,8 @@ The render look like this this:
 The mandatory part ask us just to render in isometric, it doesn't tell how
 the color need to be managed, same for other stuff like scaling, movement, ...
 
+The 2D engine used here is the MacroLibX: [[https://github.com/seekrs/MacroLibX]]
+
 ## ✍️My choice
 
 I loved this project so I decided to add other stuff in it to make it more mine:
